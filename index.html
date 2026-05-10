@@ -36,11 +36,21 @@ html, body {
     width: 100%;
 }
 
+/* 
+  STABLE HARDWARE-ACCELERATED CUSTOM CURSOR 
+  Uses native CSS cursor with a dynamic black SVG arrow for zero lag.
+*/
 body {
     font-family: 'Inter', sans-serif;
     background: var(--bg);
     color: var(--text);
-    cursor: none; 
+    /* Standard futuristic black arrow with cyan neon outline */
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="%23000000" stroke="%2300f5ff" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>'), auto; 
+}
+
+/* Dynamic Hover Cursor (Turns Purple & Thicker when over clickable items) */
+a, .btn, .tag, .menu-btn, .chat-chip, #chat-toggle-btn, #send-chat, button, #close-chat {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="%23000000" stroke="%239b5cff" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"><path d="M3 3l7.07 16.97 2.51-7.39 7.39-2.51L3 3z"/></svg>'), pointer !important;
 }
 
 /* Futuristic Scanline Overlay */
@@ -48,21 +58,6 @@ body::after {
     content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
     background-size: 100% 4px, 3px 100%; pointer-events: none; z-index: 9000; opacity: 0.35;
-}
-
-/* Dynamic Cursor Upgrades */
-.cursor-dot {
-    width: 6px; height: 6px; background: var(--cyan); border-radius: 50%;
-    position: fixed; pointer-events: none; z-index: 9999;
-    transform: translate(-50%, -50%); transition: transform 0.1s ease;
-    box-shadow: 0 0 10px var(--cyan);
-}
-.cursor-ring {
-    width: 36px; height: 36px; border: 1.5px solid var(--purple); border-radius: 50%;
-    position: fixed; pointer-events: none; z-index: 9998;
-    transform: translate(-50%, -50%);
-    transition: width 0.3s, height 0.3s, border-color 0.3s, background 0.3s;
-    box-shadow: 0 0 15px rgba(155, 92, 255, 0.5);
 }
 
 /* Dynamic Interactive Gradient Background */
@@ -75,7 +70,7 @@ body::before {
     z-index: -5; will-change: background;
 }
 
-/* New Cyber Constellation Interactive Background Layer */
+/* Cyber Constellation Interactive Background Layer */
 #network-bg {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     z-index: -4; pointer-events: none; opacity: 0.8;
@@ -171,7 +166,7 @@ body::before {
 .ai-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 8px var(--green); animation: blink 1.5s infinite; }
 @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-#close-chat { background: none; border: none; color: var(--red); font-size: 1.5rem; cursor: none; transition: 0.3s; line-height: 1; }
+#close-chat { background: none; border: none; color: var(--red); font-size: 1.5rem; transition: 0.3s; line-height: 1; }
 #close-chat:hover { text-shadow: 0 0 10px var(--red); transform: scale(1.2); }
 
 #chat-messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
@@ -188,7 +183,7 @@ body::before {
 .chat-quick-prompts::-webkit-scrollbar { height: 0; }
 .chat-chip { 
     background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.2); padding: 5px 10px; 
-    border-radius: 20px; font-size: 0.75rem; color: var(--cyan); cursor: none; white-space: nowrap; transition: 0.2s;
+    border-radius: 20px; font-size: 0.75rem; color: var(--cyan); white-space: nowrap; transition: 0.2s;
 }
 .chat-chip:hover { background: rgba(0,245,255,0.2); border-color: var(--cyan); color: #fff; }
 
@@ -198,7 +193,7 @@ body::before {
     color: #fff; padding: 10px 12px; border-radius: 8px; outline: none; font-family: 'Inter', sans-serif; font-size: 0.85rem;
 }
 #chat-input:focus { border-color: var(--cyan); box-shadow: 0 0 8px rgba(0,245,255,0.3); }
-#send-chat { background: var(--cyan); color: #000; border: none; padding: 0 15px; border-radius: 8px; font-weight: bold; cursor: none; transition: 0.3s; }
+#send-chat { background: var(--cyan); color: #000; border: none; padding: 0 15px; border-radius: 8px; font-weight: bold; transition: 0.3s; }
 #send-chat:hover { box-shadow: 0 0 15px var(--cyan); transform: scale(1.05); }
 
 /* Typing Indicator */
@@ -213,7 +208,7 @@ body::before {
     position: fixed; bottom: 25px; right: 25px; width: 65px; height: 65px;
     background: linear-gradient(135deg, var(--cyan), var(--purple));
     border-radius: 50%; display: flex; justify-content: center; align-items: center;
-    cursor: none; box-shadow: 0 0 20px rgba(0, 245, 255, 0.4); z-index: 9999;
+    box-shadow: 0 0 20px rgba(0, 245, 255, 0.4); z-index: 9999;
     transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease; 
     font-size: 20px; color: #000; font-family: 'Orbitron'; font-weight: bold; border: 2px solid rgba(255,255,255,0.4);
 }
@@ -275,7 +270,7 @@ nav.hidden-top { transform: translateY(-100%); }
 .nav-links{ display:flex; gap:30px; }
 .nav-links a{
     color: var(--muted); text-decoration:none; transition:.3s; position:relative;
-    font-size: 0.90rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase; cursor: none;
+    font-size: 0.90rem; font-weight: 500; letter-spacing: 1px; text-transform: uppercase;
 }
 .nav-links a::after{
     content:''; position:absolute; left: 50%; bottom:-5px; width: 0; height: 2px;
@@ -285,7 +280,7 @@ nav.hidden-top { transform: translateY(-100%); }
 .nav-links a:hover{ color: #fff; text-shadow: 0 0 10px var(--cyan); }
 .nav-links a:hover::after{ width: 100%; }
 
-.menu-btn { display: none; color: var(--cyan); font-size: 28px; cursor: none; text-shadow: 0 0 10px var(--cyan); }
+.menu-btn { display: none; color: var(--cyan); font-size: 28px; text-shadow: 0 0 10px var(--cyan); }
 
 /* Layout Sections */
 section { padding:130px 8% 80px; position: relative; }
@@ -314,7 +309,7 @@ section { padding:130px 8% 80px; position: relative; }
 .btn{
     padding:16px 36px; border-radius: 50px; text-decoration:none; font-weight:600;
     transition: all .2s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease; 
-    letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem; cursor: none;
+    letter-spacing: 1px; text-transform: uppercase; font-size: 0.9rem;
     border-top: 1px solid rgba(255,255,255,0.6) !important;
     border-left: 1px solid rgba(255,255,255,0.4) !important;
     box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 2px 10px rgba(255,255,255,0.3) !important;
@@ -366,7 +361,7 @@ section { padding:130px 8% 80px; position: relative; }
     border-bottom: 1px solid rgba(0,0,0,0.4); border-right: 1px solid rgba(0,0,0,0.4);
     color: var(--cyan); font-size: 0.85rem; font-weight: 600; letter-spacing: 1px; 
     box-shadow: 0 5px 10px rgba(0,0,0,0.4), inset 0 2px 5px rgba(255,255,255,0.2); 
-    backdrop-filter: blur(15px) saturate(120%); transition: 0.3s; cursor: none; 
+    backdrop-filter: blur(15px) saturate(120%); transition: 0.3s; 
 }
 .tag:hover { background: rgba(0, 245, 255, 0.2); box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 245, 255, 0.4); color: #fff; transform: translateY(-3px); }
 
@@ -412,10 +407,11 @@ footer{ padding:50px 20px; text-align:center; color:var(--muted); border-top:1px
     .contact-links .btn { width: 100%; }
 }
 
-/* Stable Android/iOS Support - Disable heavy cursors & 3D on touch */
+/* Stable Android/iOS Support */
 @media (hover: none) and (pointer: coarse) {
-    .cursor-dot, .cursor-ring, .sparkle { display: none !important; }
-    body, a, .btn, .tag, .menu-btn, .chat-chip, #chat-toggle-btn, #send-chat { cursor: auto !important; }
+    .sparkle { display: none !important; }
+    /* Let mobile use standard interaction without forced cursors */
+    body, a, .btn, .tag, .menu-btn, .chat-chip, #chat-toggle-btn, #send-chat, button { cursor: auto !important; }
     .tilt-fx, .glass { transform: none !important; transition: none !important; animation: none !important; } 
     .floating-card { animation: none !important; }
     .glossy-overlay::after { display: none !important; }
@@ -430,10 +426,6 @@ footer{ padding:50px 20px; text-align:center; color:var(--muted); border-top:1px
 <canvas id="network-bg"></canvas>
 <div class="diamond-bg" id="diamond-bg"></div>
 <div class="grid-container"><div class="grid"></div></div>
-
-<!-- Custom Cursor Elements -->
-<div class="cursor-dot" id="cursor-dot"></div>
-<div class="cursor-ring" id="cursor-ring"></div>
 
 <!-- Futuristic AI Assistant -->
 <div id="chat-toggle-btn" class="tilt-fx">AI</div>
@@ -693,37 +685,16 @@ window.addEventListener('scroll', () => {
 function toggleMenu() { document.getElementById('navLinks').classList.toggle('active'); }
 
 /* ========================================= */
-/* 2. DYNAMIC CURSOR & BACKGROUND TRACKING   */
+/* 2. DYNAMIC BACKGROUND TRACKING & SPARKLES */
 /* ========================================= */
-const cursorDot = document.getElementById('cursor-dot');
-const cursorRing = document.getElementById('cursor-ring');
 const root = document.documentElement;
 let mouseX = window.innerWidth / 2;
 let mouseY = window.innerHeight / 2;
-let ringX = mouseX;
-let ringY = mouseY;
 let isMoving = false;
-
-// Smooth ring interpolation
-function animateCursor() {
-    ringX += (mouseX - ringX) * 0.2;
-    ringY += (mouseY - ringY) * 0.2;
-    cursorRing.style.left = `${ringX}px`;
-    cursorRing.style.top = `${ringY}px`;
-    requestAnimationFrame(animateCursor);
-}
-
-if (window.innerWidth > 900 && window.matchMedia("(pointer: fine)").matches) {
-    animateCursor();
-}
 
 window.addEventListener('mousemove', (e) => {
     if(window.innerWidth > 900 || window.matchMedia("(pointer: fine)").matches) {
         mouseX = e.clientX; mouseY = e.clientY;
-        
-        // Dot follows instantly
-        cursorDot.style.left = mouseX + 'px';
-        cursorDot.style.top = mouseY + 'px';
         
         // Background gradient tracker
         if (!isMoving) {
@@ -735,7 +706,7 @@ window.addEventListener('mousemove', (e) => {
             });
         }
 
-        /* Trailing Sparkles */
+        /* Trailing Sparkles (kept for visual flair, doesn't affect cursor) */
         if(Math.random() > 0.85) { 
             let s = document.createElement('div');
             s.className = 'sparkle';
@@ -746,25 +717,6 @@ window.addEventListener('mousemove', (e) => {
             setTimeout(() => s.remove(), 700);
         }
     }
-});
-
-/* Interactive Elements Cursor State */
-const interactables = document.querySelectorAll('a, .btn, .menu-btn, .tag, #chat-toggle-btn, .chat-chip');
-interactables.forEach(el => {
-    el.addEventListener('mouseenter', () => { 
-        if(window.innerWidth > 900) {
-            cursorRing.style.width = '55px'; cursorRing.style.height = '55px'; 
-            cursorRing.style.background = 'rgba(0, 245, 255, 0.1)';
-            cursorRing.style.borderColor = 'var(--cyan)';
-        }
-    });
-    el.addEventListener('mouseleave', () => { 
-        if(window.innerWidth > 900) {
-            cursorRing.style.width = '36px'; cursorRing.style.height = '36px'; 
-            cursorRing.style.background = 'transparent';
-            cursorRing.style.borderColor = 'var(--purple)';
-        }
-    });
 });
 
 /* ========================================= */
@@ -798,8 +750,6 @@ window.addEventListener('mousedown', (e) => {
     currentDent.style.left = e.clientX + 'px'; currentDent.style.top = e.clientY + 'px';
     document.body.appendChild(currentDent);
     
-    if(window.innerWidth > 900) cursorRing.style.transform = 'translate(-50%, -50%) scale(0.8)';
-    
     const interactive = e.target.closest('.tilt-fx');
     if(interactive && window.innerWidth > 900) {
         interactive.style.transform += ' scale3d(0.95, 0.95, 0.95)';
@@ -813,7 +763,6 @@ window.addEventListener('mouseup', () => {
         currentDent.style.transform = 'translate(-50%, -50%) scale(1.5)';
         let d = currentDent; setTimeout(() => d.remove(), 300); currentDent = null;
     }
-    if(window.innerWidth > 900) cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
     
     document.querySelectorAll('[data-pressed="true"]').forEach(el => {
         el.style.transform = el.style.transform.replace(' scale3d(0.95, 0.95, 0.95)', '');
